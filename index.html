@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ OfferFlow | Offer Generator</title>
+    <meta
+      name="description"
+      content="DZ OfferFlow helps businesses create conversion-focused offer proposals in seconds."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js" defer></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar fade-in">
+      <div class="brand">
+        <img src="https://girodayzzzz.github.io/DZ-Media/logo.png" alt="DZ Media logo" class="logo" />
+        <span>DZ OfferFlow</span>
+      </div>
+      <a href="https://girodayzzzz.github.io/DZ-Media/" target="_blank" rel="noopener noreferrer" class="main-link"
+        >Main Website</a
+      >
+    </header>
+
+    <section class="hero fade-in delay-1">
+      <h1>Create offers that close clients</h1>
+      <p>Professional pricing proposals in seconds — by DZ Media</p>
+    </section>
+
+    <main class="app-grid fade-in delay-2">
+      <section class="panel form-panel card-glow">
+        <h2>Offer Details</h2>
+        <form id="offerForm" novalidate>
+          <div class="field-group">
+            <label for="businessName">Business Name</label>
+            <input type="text" id="businessName" name="businessName" placeholder="DZ Media" required />
+          </div>
+
+          <div class="field-group">
+            <label for="clientName">Client Name</label>
+            <input type="text" id="clientName" name="clientName" placeholder="Client / Company" required />
+          </div>
+
+          <div class="field-group">
+            <label for="projectDescription">Project / Service Description</label>
+            <textarea
+              id="projectDescription"
+              name="projectDescription"
+              rows="3"
+              placeholder="Website redesign, social media management, etc."
+            ></textarea>
+          </div>
+
+          <div class="field-row">
+            <div class="field-group">
+              <label for="offerDate">Date</label>
+              <input type="date" id="offerDate" name="offerDate" required />
+            </div>
+            <div class="field-group">
+              <label for="offerNumber">Offer Number</label>
+              <input type="text" id="offerNumber" name="offerNumber" readonly />
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="recommendedPackage">Recommended Package</label>
+            <select id="recommendedPackage" name="recommendedPackage">
+              <option value="standard" selected>Standard (Most Popular)</option>
+              <option value="basic">Basic</option>
+              <option value="premium">Premium</option>
+            </select>
+          </div>
+
+          <h3>Pricing Packages</h3>
+          <p class="hint">Add compelling features to help clients quickly compare and choose.</p>
+
+          <div class="package-form" data-package="basic">
+            <h4>Basic</h4>
+            <div class="field-group">
+              <label for="basicTitle">Package Title</label>
+              <input type="text" id="basicTitle" name="basicTitle" placeholder="Starter Plan" />
+            </div>
+            <div class="field-group">
+              <label for="basicDescription">Description</label>
+              <textarea id="basicDescription" name="basicDescription" rows="2" placeholder="Best for small projects."></textarea>
+            </div>
+            <div class="field-group">
+              <label for="basicPrice">Price (USD)</label>
+              <input type="number" id="basicPrice" name="basicPrice" min="0" step="0.01" placeholder="499" />
+            </div>
+            <div class="field-group">
+              <label for="basicFeatures">Features (one per line)</label>
+              <textarea id="basicFeatures" name="basicFeatures" rows="4" placeholder="1 landing page&#10;2 revisions&#10;Email support"></textarea>
+            </div>
+          </div>
+
+          <div class="package-form" data-package="standard">
+            <h4>Standard</h4>
+            <div class="field-group">
+              <label for="standardTitle">Package Title</label>
+              <input type="text" id="standardTitle" name="standardTitle" placeholder="Growth Plan" />
+            </div>
+            <div class="field-group">
+              <label for="standardDescription">Description</label>
+              <textarea id="standardDescription" name="standardDescription" rows="2" placeholder="Best value for growing businesses."></textarea>
+            </div>
+            <div class="field-group">
+              <label for="standardPrice">Price (USD)</label>
+              <input type="number" id="standardPrice" name="standardPrice" min="0" step="0.01" placeholder="999" />
+            </div>
+            <div class="field-group">
+              <label for="standardFeatures">Features (one per line)</label>
+              <textarea id="standardFeatures" name="standardFeatures" rows="4" placeholder="Up to 5 pages&#10;5 revisions&#10;Priority support"></textarea>
+            </div>
+          </div>
+
+          <div class="package-form" data-package="premium">
+            <h4>Premium</h4>
+            <div class="field-group">
+              <label for="premiumTitle">Package Title</label>
+              <input type="text" id="premiumTitle" name="premiumTitle" placeholder="Scale Plan" />
+            </div>
+            <div class="field-group">
+              <label for="premiumDescription">Description</label>
+              <textarea id="premiumDescription" name="premiumDescription" rows="2" placeholder="For advanced campaigns and full support."></textarea>
+            </div>
+            <div class="field-group">
+              <label for="premiumPrice">Price (USD)</label>
+              <input type="number" id="premiumPrice" name="premiumPrice" min="0" step="0.01" placeholder="1999" />
+            </div>
+            <div class="field-group">
+              <label for="premiumFeatures">Features (one per line)</label>
+              <textarea id="premiumFeatures" name="premiumFeatures" rows="4" placeholder="Unlimited pages&#10;Unlimited revisions&#10;Dedicated manager"></textarea>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel preview-panel card-glow">
+        <div class="preview-head">
+          <h2>Live Offer Preview</h2>
+          <button id="downloadPdf" class="download-btn" type="button">Download Offer</button>
+        </div>
+
+        <article id="offerPreview" class="offer-preview">
+          <div class="preview-meta">
+            <h3 id="previewBusinessName">Your Business</h3>
+            <p><strong>Client:</strong> <span id="previewClientName">Client Name</span></p>
+            <p><strong>Offer #:</strong> <span id="previewOfferNumber">-</span></p>
+            <p><strong>Date:</strong> <span id="previewDate">-</span></p>
+            <p class="project-line"><strong>Project:</strong> <span id="previewProjectDescription">Project details appear here.</span></p>
+          </div>
+
+          <div id="previewPackages" class="preview-packages"></div>
+
+          <div class="watermark">Generated by DZ Media</div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer fade-in delay-3">
+      <p>
+        © 2026 DZ Media —
+        <a href="https://girodayzzzz.github.io/DZ-Media/" target="_blank" rel="noopener noreferrer">Visit Main Website</a>
+      </p>
+    </footer>
+  </body>
+</html>
